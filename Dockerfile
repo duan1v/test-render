@@ -48,13 +48,17 @@ RUN mkdir -p /etc/nginx/sites-enabled/ /etc/supervisor/conf.d/  /run/nginx \
     #cron
     && cat /www/wwwroot/test-render/crontabfile > /var/spool/cron/crontabs/nobody \
     && chmod 600 /var/spool/cron/crontabs/nobody \
-    && chown  -R nobody.nobody /var/spool/cron/crontabs \
+    && chown -R nobody.nobody /var/spool/cron/crontabs \
     && touch /var/spool/cron/crontabs/root \
-    && chown  -R nobody.nobody /var/spool/cron/crontabs/root \
+    && chown -R nobody.nobody /var/spool/cron/crontabs/root \
     && chown nobody.nobody /var/spool/cron/crontabs/nobody \
     && touch /var/log/cron.log \
     && chown nobody.nobody /var/log/cron.log
-RUN chmod -R 777 /www/wwwroot/test-render/
+RUN chmod -R 777 /www/wwwroot/test-render/ \
+    && npm install \
+    && npm run dev \
+    && php artisan breeze:install livewire --no-interaction \
+    && php artisan migrate
 
 USER root
 

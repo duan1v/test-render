@@ -8,7 +8,7 @@ services:
     environment:
       APP_NAME: 'test-render'
       APP_ENV: 'production'
-      APP_DEBUG: false
+      APP_DEBUG: true
       APP_KEY: base64:LDWx6CIwN+kS8ivEU13P72ZW7Yk8EpxQ949fyO6I4jg=
       APP_URL: http://localhost
       LOG_CHANNEL: stack
