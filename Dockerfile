@@ -3,6 +3,8 @@ FROM surnet/alpine-wkhtmltopdf:3.16.2-0.12.6-full as wkhtmltopdf
 FROM alpine:3.17
 ENV TZ=Asia/Shanghai
 
+RUN apk update && apk --no-cache add nodejs npm
+
 RUN apk --no-cache add php php-fpm php-opcache php-mysqli php-json php-openssl php-curl php81-pecl-redis \
     php-bcmath php-calendar php-dom php-exif php-fileinfo php-ftp php-gd php-gettext php-session \
     php-zlib php-xml php-phar php-intl  php-xmlreader php-ctype php-mbstring  php-tokenizer php-simplexml \
