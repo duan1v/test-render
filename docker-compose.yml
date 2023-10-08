@@ -6,13 +6,13 @@ services:
   user: root
   restart: always
   ports:
-   - "8087:80"
+   - "80:80"
   environment:
    - APP_NAME=test-render
    - APP_ENV=production
    - APP_KEY=base64:LDWx6CIwN+kS8ivEU13P72ZW7Yk8EpxQ949fyO6I4jg=
    - APP_DEBUG=false
-   - APP_URL=http://localhost:7001
+   - APP_URL=http://localhost
    - LOG_CHANNEL=stack
    - LOG_DEPRECATIONS_CHANNEL=null
    - LOG_LEVEL=debug
