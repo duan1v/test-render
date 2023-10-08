@@ -46,7 +46,10 @@ RUN mkdir -p /etc/nginx/sites-enabled/ /etc/supervisor/conf.d/  /run/nginx \
     && rm -r Dockerfile \
     && curl https://getcomposer.org/composer-2.phar > /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer \
-    && composer install  --no-dev \
+    && composer global require hirak/prestissimo \
+    && composer install --no-dev --working-dir=/www/wwwroot/test-render \
+    && php artisan config:cache \
+    && php artisan route:cache \
     #cron
     && cat /www/wwwroot/test-render/crontabfile > /var/spool/cron/crontabs/nobody \
     && chmod 600 /var/spool/cron/crontabs/nobody \
@@ -61,8 +64,8 @@ RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env > /w
 
 RUN chmod -R 777 /www/wwwroot/test-render/ \
     && npm install \
-    && php artisan breeze:install livewire --no-interaction \
-    && php artisan migrate
+    && php artisan breeze:install livewire --no-interaction --force \
+    && php artisan migrate --force
 
 USER root
 
