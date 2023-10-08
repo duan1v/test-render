@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Foundations\CustomUrlGenerator;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
 
@@ -12,7 +13,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind('url', function ($app) {
+            return new CustomUrlGenerator(
+                $app['router']->getRoutes(),
+                $app->make('request')
+            );
+        });
     }
 
     public function boot(UrlGenerator $url)
