@@ -41,7 +41,6 @@ WORKDIR  /www/wwwroot/test-render
 RUN mkdir -p /etc/nginx/sites-enabled/ /etc/supervisor/conf.d/  /run/nginx \
     && touch /run/nginx/nginx.pid \
     && cp www.conf /etc/php81/php-fpm.d/www.conf \
-    && cp /etc/secret/.env /www/wwwroot/test-render/.env \
     && cp supervisord.conf /etc/supervisor/conf.d/supervisord.conf \
     && cp default.conf /etc/nginx/http.d/ \
     && rm -r Dockerfile \
@@ -57,6 +56,11 @@ RUN mkdir -p /etc/nginx/sites-enabled/ /etc/supervisor/conf.d/  /run/nginx \
     && chown nobody.nobody /var/spool/cron/crontabs/nobody \
     && touch /var/log/cron.log \
     && chown nobody.nobody /var/log/cron.log
+
+RUN ls -la /etc/secret/.env
+
+RUN cp /etc/secret/.env /www/wwwroot/test-render/.env
+
 RUN chmod -R 777 /www/wwwroot/test-render/ \
     && npm install \
     && npm run dev \
