@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Foundations\CustomUrlGenerator;
+use App\Foundations\CustomVite;
+use Illuminate\Foundation\Vite;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
                 $app['router']->getRoutes(),
                 $app->make('request')
             );
+        });
+        $this->app->bind(Vite::class, function ($app) {
+            return new CustomVite();
         });
     }
 
