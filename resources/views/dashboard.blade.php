@@ -12,11 +12,6 @@
                     {{ __("You're logged in!") }}
                 </div>
             </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-3">
-                <div class="p-6 text-gray-900">
-                    <livewire:user-list />
-                </div>
-            </div>
         </div>
     </div>
 </x-app-layout>
