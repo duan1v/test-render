@@ -63,11 +63,11 @@ RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env > /w
 RUN chmod -R 777 /www/wwwroot/test-render/ \
     && npm install \
     && npm run build \
-    && php artisan config:cache \
-    && php artisan route:cache \
     && php artisan migrate --force \
     # [blade], [livewire], [react], [vue], and [api]
 #    && php artisan breeze:install blade --no-interaction
+    && php artisan config:cache \
+    && php artisan route:cache
 
 USER root
 
