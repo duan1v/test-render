@@ -1,5 +1,5 @@
 services:
-  - name: app
+  - name: test-render
     env: production
     plan: starter
     region: frankfurt
@@ -10,7 +10,7 @@ services:
       APP_ENV: 'production'
       APP_DEBUG: false
       APP_KEY: base64:LDWx6CIwN+kS8ivEU13P72ZW7Yk8EpxQ949fyO6I4jg=
-      APP_URL: http://localhost:8087
+      APP_URL: http://localhost
       LOG_CHANNEL: stack
       LOG_DEPRECATIONS_CHANNEL: null
       LOG_LEVEL: debug
