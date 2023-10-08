@@ -57,8 +57,7 @@ RUN mkdir -p /etc/nginx/sites-enabled/ /etc/supervisor/conf.d/  /run/nginx \
     && touch /var/log/cron.log \
     && chown nobody.nobody /var/log/cron.log
 
-RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env
-#cp /etc/secret/.env /www/wwwroot/test-render/.env
+RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env > /www/wwwroot/test-render/.env
 
 RUN chmod -R 777 /www/wwwroot/test-render/ \
     && npm install \
