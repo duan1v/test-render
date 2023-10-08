@@ -1,0 +1,73 @@
+version: "2"
+services:
+ php:
+  build: .
+  container_name: test-render-php-web-1
+  user: root
+  restart: always
+  ports:
+   - "8087:80"
+  environment:
+   - APP_NAME=test-render
+   - APP_ENV=production
+   - APP_KEY=base64:LDWx6CIwN+kS8ivEU13P72ZW7Yk8EpxQ949fyO6I4jg=
+   - APP_DEBUG=false
+   - APP_URL=http://localhost:7001
+   - LOG_CHANNEL=stack
+   - LOG_DEPRECATIONS_CHANNEL=null
+   - LOG_LEVEL=debug
+   - DB_CONNECTION=pgsql
+   - DB_HOST=127.0.0.1
+   - DB_PORT=3306
+   - DB_DATABASE=laravel10
+   - DB_USERNAME=dywily
+   - DB_PASSWORD=q123456we
+   - PG_DATABASE_URL=postgres://dywily:zc2lctcIQxPxwTsAfzzkcgsLpPF1iAJj@dpg-ckh530sldqrs7382k330-a.oregon-postgres.render.com/test_wfx1
+   - PG_DB_HOST=dpg-ckh530sldqrs7382k330-a
+   - PG_DB_PORT=5432
+   - PG_DB_DATABASE=test_wfx1
+   - PG_DB_USERNAME=dywily
+   - PG_DB_PASSWORD=zc2lctcIQxPxwTsAfzzkcgsLpPF1iAJj
+   - BROADCAST_DRIVER=log
+   - CACHE_DRIVER=file
+   - FILESYSTEM_DISK=local
+   - QUEUE_CONNECTION=sync
+   - SESSION_DRIVER=file
+   - SESSION_LIFETIME=120
+   - MEMCACHED_HOST=127.0.0.1
+   - REDIS_HOST=127.0.0.1
+   - REDIS_PASSWORD=null
+   - REDIS_PORT=6379
+   - MAIL_MAILER=smtp
+   - MAIL_HOST=mailpit
+   - MAIL_PORT=1025
+   - MAIL_USERNAME=null
+   - MAIL_PASSWORD=null
+   - MAIL_ENCRYPTION=null
+   - MAIL_FROM_ADDRESS="hello@example.com"
+   - MAIL_FROM_NAME="${APP_NAME}"
+   - AWS_ACCESS_KEY_ID=
+   - AWS_SECRET_ACCESS_KEY=
+   - AWS_DEFAULT_REGION=us-east-1
+   - AWS_BUCKET=
+   - AWS_USE_PATH_STYLE_ENDPOINT=false
+   - PUSHER_APP_ID=
+   - PUSHER_APP_KEY=
+   - PUSHER_APP_SECRET=
+   - PUSHER_HOST=
+   - PUSHER_PORT=443
+   - PUSHER_SCHEME=https
+   - PUSHER_APP_CLUSTER=mt1
+   - VITE_APP_NAME="${APP_NAME}"
+   - VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+   - VITE_PUSHER_HOST="${PUSHER_HOST}"
+   - VITE_PUSHER_PORT="${PUSHER_PORT}"
+   - VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
+   - VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+  volumes:
+   - "/home/test-render-log/:/www/wwwroot/test-render/storage/logs/"
+   - "/home/test-render/public/falcon/newsletter-tpls/:/www/wwwroot/test-render/public/falcon/newsletter-tpls/"
+   - "/home/test-render/public/falcon/autoresponder-tpls/:/www/wwwroot/test-render/public/falcon/autoresponder-tpls/"
+   - "/home/test-render/public/uploads/:/www/wwwroot/test-render/public/uploads/"
+   - "/home/test-render/storage/app/websites/:/www/wwwroot/test-render/storage/app/websites/"

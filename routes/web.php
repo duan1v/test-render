@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/users', \App\Livewire\UserList::class);
+
 Route::get('/', function () {
     return view('welcome');
 });
