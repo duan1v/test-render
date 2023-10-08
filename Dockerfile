@@ -41,6 +41,7 @@ WORKDIR  /www/wwwroot/test-render
 RUN mkdir -p /etc/nginx/sites-enabled/ /etc/supervisor/conf.d/  /run/nginx \
     && touch /run/nginx/nginx.pid \
     && cp www.conf /etc/php81/php-fpm.d/www.conf \
+    && cp /etc/secret/.env /www/wwwroot/test-render/.env \
     && cp supervisord.conf /etc/supervisor/conf.d/supervisord.conf \
     && cp default.conf /etc/nginx/http.d/ \
     && rm -r Dockerfile \
