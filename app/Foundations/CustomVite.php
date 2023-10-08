@@ -16,14 +16,15 @@ class CustomVite extends Vite
     /**
      * Generate an asset path for the application.
      *
-     * @param  string  $path
-     * @param  bool|null  $secure
+     * @param string $path
+     * @param bool|null $secure
      * @return string
      */
     protected function assetPath($path, $secure = null)
     {
-        if (env('APP_ENV') == 'production') {
-            $secure = true;
+        $secure = true;
+        if (env('APP_ENV') == 'local') {
+            $secure = false;
         }
         return asset($path, $secure);
     }
