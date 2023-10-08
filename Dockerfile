@@ -63,7 +63,7 @@ RUN chmod -R 777 /www/wwwroot/test-render/ \
     && npm install \
     && php artisan config:cache \
     && php artisan route:cache \
-    && php artisan breeze:install livewire --no-interaction \
+    && php artisan breeze:install blade --no-interaction \
     && php artisan migrate --force
 
 USER root
