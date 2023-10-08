@@ -61,7 +61,6 @@ RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env > /w
 
 RUN chmod -R 777 /www/wwwroot/test-render/ \
     && npm install \
-    && npm run dev \
     && php artisan breeze:install livewire --no-interaction \
     && php artisan migrate
 
