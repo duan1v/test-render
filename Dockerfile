@@ -58,7 +58,7 @@ RUN mkdir -p /etc/nginx/sites-enabled/ /etc/supervisor/conf.d/  /run/nginx \
     && chown nobody.nobody /var/log/cron.log
 RUN chmod -R 777 /www/wwwroot/test-render/ \
     && npm install \
-#    && npm run dev \
+    && npm run dev \
     && php artisan breeze:install livewire --no-interaction \
     && php artisan migrate
 
