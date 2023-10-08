@@ -66,7 +66,7 @@ RUN chmod -R 777 /www/wwwroot/test-render/ \
     && php artisan route:cache \
     && php artisan migrate --force \
     # [blade], [livewire], [react], [vue], and [api]
-    && php artisan breeze:install blade --no-interaction \
+#    && php artisan breeze:install blade --no-interaction \
     && npm run build
 
 USER root
