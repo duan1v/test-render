@@ -52,8 +52,6 @@ return [
 
     'lazy_placeholder' => null,
 
-    'asset_url' => env('APP_URL', 'http://localhost'),
-
     /*
     |---------------------------------------------------------------------------
     | Temporary File Uploads
