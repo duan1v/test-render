@@ -25,6 +25,6 @@ class CustomVite extends Vite
         if (env('APP_ENV') == 'production') {
             $secure = true;
         }
-        return asset($path, true);
+        return asset($path, $secure);
     }
 }
