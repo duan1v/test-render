@@ -15,20 +15,22 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind('url', function ($app) {
-            return new CustomUrlGenerator(
-                $app['router']->getRoutes(),
-                $app->make('request')
-            );
-        });
-        $this->app->bind(Vite::class, function ($app) {
-            return new CustomVite();
-        });
+        if (env('APP_ENV') != 'local') {
+            $this->app->bind('url', function ($app) {
+                return new CustomUrlGenerator(
+                    $app['router']->getRoutes(),
+                    $app->make('request')
+                );
+            });
+            $this->app->bind(Vite::class, function ($app) {
+                return new CustomVite();
+            });
+        }
     }
 
     public function boot(UrlGenerator $url)
     {
-        if (env('APP_ENV') == 'production') {
+        if (env('APP_ENV')  != 'local') {
             $url->forceScheme('https');
         }
     }

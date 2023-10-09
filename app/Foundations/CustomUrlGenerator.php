@@ -3,7 +3,6 @@
 namespace App\Foundations;
 
 use Illuminate\Routing\UrlGenerator;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 /**
  * Class CustomUrlGenerator
@@ -15,18 +14,12 @@ class CustomUrlGenerator extends UrlGenerator
 {
     public function asset($path, $secure = null)
     {
-        if (env('APP_ENV') == 'production') {
-            $secure = true;
-        }
-        return parent::asset($path, $secure);
+        return parent::asset($path, true);
     }
 
     public function route($name, $parameters = [], $absolute = true)
     {
-        $route = parent::route($name, $parameters = [], $absolute = true);
-        if (env('APP_ENV') != 'local') {
-            $route = preg_replace('/^http:/i', 'https:', $route);
-        }
-        return $route;
+        $route = parent::route($name, $parameters, $absolute);
+        return preg_replace('/^http:/i', 'https:', $route);
     }
 }

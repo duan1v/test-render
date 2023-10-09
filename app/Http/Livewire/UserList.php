@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Http\Livewire;
 
-use Livewire\Component;
 use App\Models\User;
+use Livewire\Component;
 
 class UserList extends Component
 {

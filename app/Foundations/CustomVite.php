@@ -3,7 +3,6 @@
 namespace App\Foundations;
 
 use Illuminate\Foundation\Vite;
-use Illuminate\Routing\UrlGenerator;
 
 /**
  * Class CustomUrlGenerator
@@ -22,10 +21,6 @@ class CustomVite extends Vite
      */
     protected function assetPath($path, $secure = null)
     {
-        $secure = true;
-        if (env('APP_ENV') == 'local') {
-            $secure = false;
-        }
-        return asset($path, $secure);
+        return asset($path, true);
     }
 }

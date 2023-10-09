@@ -14,7 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/users', \App\Livewire\UserList::class);
+Route::get('/users', \App\Http\Livewire\UserList::class);
+
+Route::get('/list', \App\Http\Livewire\ListComponent::class);
+
+Route::get('/search', \App\Http\Livewire\Search::class);
+
+Route::get('/count', \App\Http\Livewire\Counter::class);
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,4 +36,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
