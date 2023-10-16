@@ -59,7 +59,7 @@ class Filter extends Component
     {
         $this->selectedCols = array_keys($this->columns);
         $this->colsOrder = array_keys($this->columns);
-        $this->dispatch('localStorageSelectedColsSaved', json_encode($this->selectedCols));
+        $this->dispatch('localStorageSelectedColsSaved', $this->selectedCols);
         $this->dispatch('updateColsOrder', $this->colsOrder);
     }
 
@@ -83,7 +83,7 @@ class Filter extends Component
             }
             return false;
         });
-        $this->dispatch('localStorageSelectedColsSaved', json_encode($this->selectedCols));
+        $this->dispatch('localStorageSelectedColsSaved', $this->selectedCols);
     }
 
     #[On('updateColsOrder')]

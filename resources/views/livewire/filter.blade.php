@@ -87,7 +87,8 @@
 
         document.addEventListener('livewire:init', function () {
             Livewire.on('localStorageSelectedColsSaved', function (data) {
-                setCookie("selectedColsEe", data, 365 * 10);
+                console.log(data)
+                setCookie("selectedColsEe", JSON.stringify(...data), 365 * 10);
             });
             Livewire.on('localStorageColsOrderSaved', function (data) {
                 setCookie("colsOrderEe", JSON.stringify(...data), 365 * 10);
