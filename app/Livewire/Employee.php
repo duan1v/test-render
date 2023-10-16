@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Employee as EmployeeModel;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 use function App\setInitValueWithCookie;
@@ -14,8 +15,7 @@ class Employee extends Component
     public $columns;
 
     public $limit = 15;
-    public $validations;
-    public $colsOrder = [];
+    public $colsOrder;
 
     public $search;
     public $selectedCols = [];
@@ -33,14 +33,11 @@ class Employee extends Component
     protected function getListeners()
     {
         return [
-            'updateCols' => 'setCols',
-            'search' => 'search',
-            'updateColsOrder' => 'updateColsOrder',
-            'resetCols' => 'resetCols',
-            'changeLimit' => 'changeLimit',
+            'resetCols'                        => 'resetCols',
+            'changeLimit'                      => 'changeLimit',
             'localStorageSelectedColsReceived' => 'localStorageSelectedColsReceived',
-            'localStorageColsOrderReceived' => 'localStorageColsOrderReceived',
-            'localStorageLimitReceived' => 'localStorageLimitReceived',
+            'localStorageColsOrderReceived'    => 'localStorageColsOrderReceived',
+            'localStorageLimitReceived'        => 'localStorageLimitReceived',
         ];
     }
 
@@ -60,9 +57,10 @@ class Employee extends Component
         $this->colsOrder = $data;
     }
 
+    #[On('updateCols')]
     public function setCols($cols)
     {
-        $this->selectedCols = json_decode($cols, true);
+        $this->selectedCols = $cols;
     }
 
     public function changeLimit($limit)
@@ -76,11 +74,13 @@ class Employee extends Component
         $this->limit = (int)$limit;
     }
 
-    public function updateColsOrder($colsOrder)
+    #[On('updateColsOrder')]
+    public function updateColsOrder($list)
     {
-        $this->colsOrder = $colsOrder;
+        $this->colsOrder = array_unique($list);
     }
 
+    #[On('search')]
     public function search($search)
     {
         $this->resetPage();
@@ -90,6 +90,7 @@ class Employee extends Component
     public function resetCols()
     {
         $this->selectedCols = array_keys($this->columns);
+        $this->colsOrder = array_keys($this->columns);
     }
 
     public function render()
@@ -106,7 +107,6 @@ class Employee extends Component
         } else {
             $rows = collect();
         }
-        $this->dispatch('resetPopover');
         return view('livewire.employee', compact('rows'));
     }
 }

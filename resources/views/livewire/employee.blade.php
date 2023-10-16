@@ -57,8 +57,13 @@
         </div>
     @endif
     <script type="module">
-        document.addEventListener('livewire:init', function () {
-            window.livewire.on('localStorageLimitSaved', function (data) {
+        // document.addEventListener('livewire:init', function () {
+        //     Livewire.on('localStorageLimitSaved', function (data) {
+        //         setCookie("ee-limit", data, 365 * 10);
+        //     });
+        // });
+        document.addEventListener('livewire:initialized', () => {
+            @this.on('localStorageLimitSaved', (data) => {
                 setCookie("ee-limit", data, 365 * 10);
             });
         });

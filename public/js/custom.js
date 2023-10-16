@@ -82,16 +82,3 @@ function loadPdf(url, workerSrc, cid) {
     });
 }
 
-var checkboxSelectItem = "input.checkbox-select-item[type='checkbox']";
-var checkboxSelectAll = "input.checkbox-select-all[type='checkbox']";
-$("body").on("change", checkboxSelectAll, function (e) {
-    let dom = $(this);
-    let setting = JSON.parse(dom.attr("data-check-setting"));
-    $("#" + setting.body + " " + checkboxSelectItem)
-        .prop("checked", $(this).prop("checked"))
-        .trigger("change");
-}).on("change", "#change-lan", function (e) {
-    let dom = $(this);
-    window.location.href = dom.find("option:selected").attr('data-lan-url');
-})
-

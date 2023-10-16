@@ -1,6 +1,5 @@
 <x-app-layout>
-    <script type="module" src="{{asset("js/draggable.bundle.legacy.js")}}"></script>
-    <script type="module" src="{{asset("js/custom.js")}}"></script>
+    <script type="module" src="{{asset("js/Sortable.min.js")}}"></script>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Employee

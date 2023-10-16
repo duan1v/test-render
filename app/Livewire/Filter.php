@@ -3,19 +3,25 @@
 namespace App\Livewire;
 
 use App\Models\Employee;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 use function App\setInitValueWithCookie;
 
 class Filter extends Component
 {
+    #[Rule(['required', 'string'])]
     public $search;
 
+    #[Rule(['required', 'int'])]
     public $limit;
 
     public $columns;
 
     public $tab = 'none';
     public $selectedCols = [];
+
+    #[Rule(['required', 'array'])]
     public $colsOrder = [];
 
     public function mount()
@@ -31,12 +37,11 @@ class Filter extends Component
     protected function getListeners()
     {
         return [
-            'changeFilterTab' => 'changeFilterTab',
-            'resetCols' => 'resetCols',
-            'updateColsOrder' => 'updateColsOrder',
+            'changeFilterTab'                  => 'changeFilterTab',
+            'resetCols'                        => 'resetCols',
             'localStorageSelectedColsReceived' => 'localStorageSelectedColsReceived',
-            'localStorageColsOrderReceived' => 'localStorageColsOrderReceived',
-            'localStorageLimitReceived' => 'localStorageLimitReceived',
+            'localStorageColsOrderReceived'    => 'localStorageColsOrderReceived',
+            'localStorageLimitReceived'        => 'localStorageLimitReceived',
         ];
     }
 
@@ -53,7 +58,9 @@ class Filter extends Component
     public function resetCols()
     {
         $this->selectedCols = array_keys($this->columns);
+        $this->colsOrder = array_keys($this->columns);
         $this->dispatch('localStorageSelectedColsSaved', json_encode($this->selectedCols));
+        $this->dispatch('updateColsOrder', $this->colsOrder);
     }
 
     public function changeFilterTab($tab)
@@ -79,15 +86,28 @@ class Filter extends Component
         $this->dispatch('localStorageSelectedColsSaved', json_encode($this->selectedCols));
     }
 
+    #[On('updateColsOrder')]
     public function updateColsOrder($list)
     {
         $this->colsOrder = array_unique($list);
+        $this->dispatch('localStorageColsOrderSaved', $this->colsOrder);
     }
 
     public function handleLimitChange()
     {
         $this->dispatch('changeLimit', $this->limit);
         $this->dispatch('localStorageLimitSaved', $this->limit);
+    }
+
+    public function handleUpdateSelectedCols()
+    {
+        $this->dispatch('updateCols', $this->selectedCols);
+    }
+
+
+    public function handleSearch()
+    {
+        $this->dispatch('search', search: $this->search);
     }
 
     public function localStorageLimitReceived($limit)

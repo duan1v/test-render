@@ -1,12 +1,12 @@
 <div>
     <div>
-        <input wire:model="message" type="text">
+        <input wire:model.live="message" type="text">
 
         <h1>{{ $message }}</h1>
     </div>
 
     <div class="relative w-96">
-        <input type="text" wire:model.debounce.500ms="search" class="w-full rounded-md mb-3"
+        <input type="text" wire:model.live="search" class="w-full rounded-md mb-3"
                placeholder="Search employees by name..."/>
         <div class="shadow bg-white mt-2 top-100 z-40 w-full rounded p-2">
             <div class="w-full">
