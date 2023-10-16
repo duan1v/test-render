@@ -19,7 +19,7 @@ new #[Layout('layouts.guest')] class extends Component {
     #[Rule(['boolean'])]
     public bool $remember = false;
 
-    public function login(): void
+    public function login()
     {
         $this->validate();
 
@@ -37,10 +37,11 @@ new #[Layout('layouts.guest')] class extends Component {
 
         session()->regenerate();
 
-        $this->redirect(
-            session('url.intended', RouteServiceProvider::HOME),
-            navigate: true
-        );
+        return redirect(route("dashboard"));
+//        $this->redirect(
+//            session('url.intended', RouteServiceProvider::HOME),
+//            navigate: true
+//        );
     }
 
     protected function ensureIsNotRateLimited(): void
