@@ -13,11 +13,11 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/sass/app.scss', 'resources/js/app.js'])
-        @yield('head-js')
+        @livewireStyles
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+            <livewire:layout.navigation />
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -33,5 +33,6 @@
                 {{ $slot }}
             </main>
         </div>
+        @livewireScriptConfig
     </body>
 </html>

@@ -29,6 +29,19 @@ class Employee extends Model
 {
     use HasFactory;
 
+    const COLUMNS = [
+        'id' => ['title' => 'Title  ID', 'name' => 'Name ID'],
+        'name' => ['title' => 'Title name', 'name' => 'Name name'],
+        'age' => ['title' => 'Title age', 'name' => 'Name age'],
+        'email' => ['title' => 'Title email', 'name' => 'Name email'],
+        'country' => ['title' => 'Title country', 'name' => 'Name country'],
+        'type' => ['title' => 'Title type', 'name' => 'Name type'],
+        'job' => ['title' => 'Title job', 'name' => 'Name job'],
+        'brief' => ['title' => 'Title brief', 'name' => 'Name brief'],
+        'created_at' => ['title' => 'Title created_at', 'name' => 'Name created_at'],
+        'updated_at' => ['title' => 'Title updated_at', 'name' => 'Name updated_at'],
+    ];
+
     protected $table = "employees";
 
     protected $fillable = [
