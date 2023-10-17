@@ -20,7 +20,16 @@
                         <tr class="btn-reveal-trigger">
                             @foreach($colsOrder as $column)
                                 @if(in_array($column,$selectedCols))
-                                    <td class="align-middle py-2">{{data_get($a, $column)}}</td>
+                                    @php($val = data_get($a, $column))
+                                    @if($column=="job")
+                                        <td class="align-middle py-2">
+                                            <span class="cursor-pointer d-inline" data-bs-toggle="modal"
+                                                  data-job='{{$val}}'
+                                                  data-bs-target="#jobList">{{$val}}</span>
+                                        </td>
+                                    @else
+                                        <td class="align-middle py-2">{{$val}}</td>
+                                    @endif
                                 @endif
                             @endforeach
                         </tr>
@@ -51,21 +60,22 @@
                 </select>
             </div>
         </div>
+        <livewire:code />
     @else
         <div class="text-center">
             <p class="fw-bold fs-1 mt-3">No data found</p>
         </div>
     @endif
     <script type="module">
-        // document.addEventListener('livewire:init', function () {
-        //     Livewire.on('localStorageLimitSaved', function (data) {
-        //         setCookie("ee-limit", data, 365 * 10);
-        //     });
-        // });
-        document.addEventListener('livewire:initialized', () => {
-            @this.on('localStorageLimitSaved', (data) => {
+        document.addEventListener('livewire:init', function () {
+            Livewire.on('localStorageLimitSaved', function (data) {
                 setCookie("ee-limit", data, 365 * 10);
             });
         });
+        // document.addEventListener('livewire:initialized', () => {
+        //     @this.on('localStorageLimitSaved', (data) => {
+        //         setCookie("ee-limit", data, 365 * 10);
+        //     });
+        // });
     </script>
 </div>

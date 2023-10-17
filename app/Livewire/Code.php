@@ -2,65 +2,52 @@
 
 namespace App\Livewire;
 
+use Illuminate\Database\Eloquent\Builder;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use function App\setInitValueWithCookie;
 
 class Code extends Component
 {
-    public $showCodeList;
-    public $allBooks;
-    public $codeTables;
-    public $codeTag;
-    public $bookId = 0;
+    public $showJobList;
+    public $nums;
+    public $ems;
+    public $job;
+    public $num = 0;
 
     public function mount()
     {
-//        $this->allBooks = CodeBook::all();
-        $this->bookId = setInitValueWithCookie('book-id', 0, false);
+        $this->nums = [1 => '一', 2 => '二', 3 => '三'];
+        $this->num = setInitValueWithCookie('ee-num', 0, false);
     }
 
-    protected function getListeners()
+    public function handleNumChange()
     {
-        return [
-            'updateCodeTag' => 'updateCodeTag',
-            'updatesShowCodeList' => 'updatesShowCodeList',
-        ];
+        $this->dispatch('localStorageNumSaved', $this->num);
     }
 
-    public function handleBookIdChange()
+    #[On('updateJob')]
+    public function updateJob($job)
     {
-        $this->emit('changeBookId', $this->bookId);
-        $this->emit('localStorageBookIdSaved', $this->bookId);
+        $this->showJobList = 1;
+        $this->job = $job;
     }
 
-    public function updateCodeTag($codeTag)
+    #[On('closeJobList')]
+    public function closeJobList()
     {
-        $this->showCodeList = 1;
-        $this->codeTag = $codeTag;
-    }
-
-    public function updatesShowCodeList()
-    {
-        $this->showCodeList = 0;
-    }
-
-    public function changeBookId($bookId)
-    {
-        $this->bookId = (int)$bookId;
+        $this->showJobList = 0;
     }
 
     public function render()
     {
-        if ($this->codeTag) {
-            $pattern = '/CL(\d+)/';
-            if (preg_match($pattern, $this->codeTag, $matches)) {
-                $this->codeTables = CodeTable::with(['codes', 'book'])
-                    ->when($this->bookId > 0, function ($query) {
-                        $query->where('book_id', $this->bookId);
-                    })
-                    ->where('table_nr', $matches[1])
-                    ->get();
-            }
+        if ($this->job) {
+            $this->ems = \App\Models\Employee::query()
+                ->where('job', 'like', '%' . $this->job . '%')
+                ->when($this->num > 0, function (Builder $query) {
+                    $query->inRandomOrder()->take($this->num);
+                })
+                ->get();
         }
         return view('livewire.code');
     }

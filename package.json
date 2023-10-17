@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "@jridgewell/sourcemap-codec": "^1.4.15",
-        "jquery": "^3.7.1"
+        "jquery": "^3.7.1",
+        "pikaday": "^1.8.2"
     }
 }

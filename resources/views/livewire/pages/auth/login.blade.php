@@ -19,7 +19,7 @@ new #[Layout('layouts.guest')] class extends Component {
     #[Rule(['boolean'])]
     public bool $remember = false;
 
-    public function login()
+    public function login(): void
     {
         $this->validate();
 
@@ -37,7 +37,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
         session()->regenerate();
 
-        return redirect(route("dashboard"));
+        redirect(route("dashboard"));
 //        $this->redirect(
 //            session('url.intended', RouteServiceProvider::HOME),
 //            navigate: true
