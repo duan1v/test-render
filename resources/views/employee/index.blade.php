@@ -1,4 +1,13 @@
 <x-app-layout>
+    <style>
+        .popover {
+            --falcon-popover-max-width: auto !important;
+        }
+
+        .custom-popover .popover-body {
+            white-space: pre-line;
+        }
+    </style>
     <script type="module" src="{{asset("js/Sortable.min.js")}}"></script>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">

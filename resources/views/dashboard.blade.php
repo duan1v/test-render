@@ -12,37 +12,43 @@
                     {{ __("You're logged in!") }}
                 </div>
             </div>
-{{--            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">--}}
-{{--                <div class="p-6 text-gray-900">--}}
-{{--                    <livewire:search/>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <livewire:dropdown/>
+                </div>
+            </div>
+            {{--            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">--}}
+            {{--                <div class="p-6 text-gray-900">--}}
+            {{--                    <livewire:search/>--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form wire:submit.prevent="schedule">
-                        <label for="title">Event Title</label>
-                        <input wire:model="title" id="title" type="text">
+{{--                    <form wire:submit.prevent="schedule">--}}
+{{--                        <label for="title">Event Title</label>--}}
+{{--                        <input wire:model="title" id="title" type="text">--}}
 
-                        <label for="date">Event Date</label>
-                        <x-date-picker wire:model="date" id="date"/>
+{{--                        <label for="date">Event Date</label>--}}
+{{--                        <x-date-picker wire:model="date" id="date"/>--}}
 
-                        <button>Schedule Event</button>
-                    </form>
+{{--                        <button>Schedule Event</button>--}}
+{{--                    </form>--}}
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div x-init="date = new Date()"  x-effect="console.log('date is '+date)">
+                    <div x-init="date = new Date()" x-effect="()=>console.log('date is '+date)">
+                        dsadsa
                     </div>
 
                     <div x-data="{ count: 0 }">
                         <button x-on:click="count++">Increment</button>
                         <span x-text="count"></span>
-                        <div x-effect="console.log('Count is '+count)"></div>
+                        <div x-effect="()=>console.log('Count is '+count)"></div>
                         <input type="text" x-ref="content">
                         <button x-on:click="navigator.clipboard.writeText($refs.content.value)">
                             Copy

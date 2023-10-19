@@ -21,15 +21,36 @@
                             @foreach($colsOrder as $column)
                                 @if(in_array($column,$selectedCols))
                                     @php($val = data_get($a, $column))
-                                    @if($column=="job")
-                                        <td class="align-middle py-2">
+                                    <td class="align-middle py-2">
+                                        @if($column=="name")
+                                            <span data-bs-trigger="hover focus"
+                                                  data-bs-toggle="popover" data-bs-placement="top"
+                                                  data-bs-title="Definition"
+                                                  data-bs-custom-class="custom-popover"
+                                                  data-bs-content='{{data_get($a,'brief')}}'>{{$val}}</span>
+                                        @elseif($column=='job')
                                             <span class="cursor-pointer d-inline" data-bs-toggle="modal"
                                                   data-job='{{$val}}'
                                                   data-bs-target="#jobList">{{$val}}</span>
-                                        </td>
-                                    @else
-                                        <td class="align-middle py-2">{{$val}}</td>
-                                    @endif
+                                        @elseif($column=='brief')
+                                            @if($val)
+                                                <span data-bs-toggle="modal" class="cursor-default"
+                                                      data-xid="{{data_get($a,'id')}}"
+                                                      data-bs-target="#noteModal">
+                                                    {{$val}}
+                                                </span>
+                                            @else
+                                                <button class="btn btn-falcon-default btn-sm"
+                                                        data-xid="{{data_get($a,'id')}}"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#noteModal">
+                                                    Add brief
+                                                </button>
+                                            @endif
+                                        @else
+                                            {{$val}}
+                                        @endif
+                                    </td>
                                 @endif
                             @endforeach
                         </tr>
@@ -60,7 +81,8 @@
                 </select>
             </div>
         </div>
-        <livewire:code />
+        <livewire:code/>
+        <livewire:update-note/>
     @else
         <div class="text-center">
             <p class="fw-bold fs-1 mt-3">No data found</p>
@@ -68,6 +90,10 @@
     @endif
     <script type="module">
         document.addEventListener('livewire:init', function () {
+            Livewire.on('resetPopover', function () {
+                $('.popover').remove();
+                $('[data-bs-toggle="popover"]').popover('dispose').popover();
+            });
             Livewire.on('localStorageLimitSaved', function (data) {
                 setCookie("ee-limit", data, 365 * 10);
             });

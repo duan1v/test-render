@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Employee as EmployeeModel;
+use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -18,6 +19,7 @@ class Employee extends Component
     public $colsOrder;
 
     public $search;
+    public $update;
     public $selectedCols = [];
     protected $paginationTheme = 'bootstrap';
 
@@ -61,6 +63,12 @@ class Employee extends Component
     public function setCols($cols)
     {
         $this->selectedCols = $cols;
+    }
+
+    #[On('saveNote1')]
+    public function saveNote1()
+    {
+        $this->update = Str::random(42);
     }
 
     public function changeLimit($limit)
@@ -107,6 +115,7 @@ class Employee extends Component
         } else {
             $rows = collect();
         }
+        $this->dispatch('resetPopover');
         return view('livewire.employee', compact('rows'));
     }
 }
