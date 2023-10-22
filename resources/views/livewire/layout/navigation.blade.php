@@ -38,6 +38,11 @@ new class extends Component {
                         Employee
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('migrate')" :active="request()->routeIs('migrate')" wire:navigate>
+                        Migrate
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

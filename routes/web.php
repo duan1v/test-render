@@ -24,6 +24,11 @@ Route::get('employee', [
     'index'
 ])->middleware(['auth', 'verified'])->name('employee');
 
+Route::get('migrate', [
+    \App\Http\Controllers\MigrateController::class,
+    'index'
+])->middleware(['auth', 'verified'])->name('migrate');
+
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
